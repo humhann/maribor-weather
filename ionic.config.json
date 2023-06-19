@@ -1,0 +1,7 @@
+{
+  "name": "Maribor Weather",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
