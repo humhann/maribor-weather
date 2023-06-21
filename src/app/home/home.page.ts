@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { WeatherComponent } from '../weather/weather.component';
@@ -11,8 +11,14 @@ import { WeatherComponent } from '../weather/weather.component';
   imports: [IonicModule, WeatherComponent, TranslateModule],
 })
 export class HomePage {
+  @ViewChild(WeatherComponent) weatherComponent!: WeatherComponent;
+
   constructor(private translate: TranslateService) {
     this.translate.use('sl');
+  }
+
+  getWeather() {
+    this.weatherComponent.getWeatherData();
   }
 
   selectLanguage(lang: string) {

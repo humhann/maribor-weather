@@ -2,6 +2,9 @@
   <ion-toolbar>
     <ion-title>{{ "appName" | translate }}</ion-title>
     <ion-buttons slot="end">
+      <ion-button (click)="getWeather()"
+        ><ion-icon name="refresh-outline"></ion-icon
+      ></ion-button>
       <ion-button (click)="selectLanguage('sl')">SI</ion-button>
       <ion-button (click)="selectLanguage('en')">EN</ion-button>
     </ion-buttons>
