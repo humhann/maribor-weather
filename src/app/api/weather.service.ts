@@ -36,10 +36,14 @@ export class WeatherService {
 
   constructor(private http: HttpClient) {}
 
-  getForecast(latitude: string, longitude: string): Observable<Forecast> {
+  getForecast(
+    latitude: string,
+    longitude: string,
+    language: string
+  ): Observable<Forecast> {
     return this.http
       .get<any>(
-        `${this.forecastUrl}?lat=${latitude}&lon=${longitude}&appid=${environment.weatherApiKey}&units=metric&lang=sl`
+        `${this.forecastUrl}?lat=${latitude}&lon=${longitude}&appid=${environment.weatherApiKey}&units=metric&lang=${language}`
       )
       .pipe(
         map((response) => ({
@@ -104,6 +108,6 @@ export class WeatherService {
   }
 
   private getIconUrl(icon: string): string {
-    return `http://openweathermap.org/img/wn/${icon}@2x.png`;
+    return `https://openweathermap.org/img/wn/${icon}@2x.png`;
   }
 }

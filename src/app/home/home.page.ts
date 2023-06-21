@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { WeatherComponent } from '../weather/weather.component';
 
 @Component({
@@ -7,8 +8,14 @@ import { WeatherComponent } from '../weather/weather.component';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonicModule, WeatherComponent],
+  imports: [IonicModule, WeatherComponent, TranslateModule],
 })
 export class HomePage {
-  constructor() {}
+  constructor(private translate: TranslateService) {
+    this.translate.use('sl');
+  }
+
+  selectLanguage(lang: string) {
+    this.translate.use(lang);
+  }
 }

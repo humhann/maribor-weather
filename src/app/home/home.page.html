@@ -1,6 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Maribor vreme</ion-title>
+    <ion-title>{{ "appName" | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="selectLanguage('sl')">SI</ion-button>
+      <ion-button (click)="selectLanguage('en')">EN</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
