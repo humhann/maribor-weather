@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map, startWith } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 export type Forecast = {
@@ -133,7 +133,7 @@ export class WeatherService {
                   .toDateString()
                   .includes(new Date().toDateString())
             )
-            // filter items of hours 6:00, 12:00 or 18:00
+            // filter items of hours 6:00, 12:00 and 18:00
             .filter((item: any) => {
               const date = new Date(item.dt_txt);
               return (
@@ -145,10 +145,11 @@ export class WeatherService {
             // group items by day
             .reduce((acc: any, item: any) => {
               const date = new Date(item.dt_txt);
-              const dateStr = date.toDateString();
+              const dateString = date.toDateString();
               let dateIndex = acc.findIndex(
-                (accItem: any) => accItem.date.toDateString() === dateStr
+                (accItem: any) => accItem.date.toDateString() === dateString
               );
+
               if (dateIndex === -1) {
                 acc.push({
                   date: date,
