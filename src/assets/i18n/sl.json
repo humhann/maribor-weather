@@ -1,0 +1,7 @@
+{
+  "appName": "Maribor vreme",
+  "acquired": "pridobljeno",
+  "dateFormat": "dd.MM.yyyy 'ob' HH:mm:ss",
+  "humidity": "vlaga",
+  "pressure": "pritisk"
+}

@@ -1,0 +1,7 @@
+{
+  "appName": "Maribor weather",
+  "acquired": "acquired on",
+  "dateFormat": "dd.MM.yyyy 'at' HH:mm:ss",
+  "humidity": "humidity",
+  "pressure": "pressure"
+}
