@@ -1,0 +1,52 @@
+<div class="wrapper">
+  <ion-spinner *ngIf="!weatherData"></ion-spinner>
+
+  <ion-grid *ngIf="weatherData">
+    <ion-row>
+      <ion-col>
+        <div class="city">{{ weatherData.city }}</div>
+        pridobljeno
+        {{ weatherData.lastUpdated | date : dateFormat }}</ion-col
+      >
+    </ion-row>
+    <ion-row>
+      <ion-col class="conditions">
+        <div class="temperature">
+          {{ weatherData.conditions.temperature.current }}°C
+        </div>
+        <div class="temperature-range">
+          {{ weatherData.conditions.temperature.min }}°C /
+          {{ weatherData.conditions.temperature.max }}°C
+        </div>
+        <div class="icon">
+          <img
+            [src]="weatherData.conditions.icon"
+            [alt]="weatherData.conditions.description"
+          />
+        </div>
+        <div class="description">
+          {{ weatherData.conditions.description }}
+        </div>
+        <div class="humidity">
+          Vlažnost: {{ weatherData.conditions.humidity }}%
+        </div>
+        <div class="pressure">
+          Pritisk: {{ weatherData.conditions.pressure }} hPa
+        </div>
+      </ion-col>
+      <ion-col class="forecast">
+        <ion-grid *ngFor="let day of weatherData.forecast">
+          <ion-row class="day">{{ day.date | date : "EEEE" }}</ion-row>
+          <ion-row class="ion-justify-content-left">
+            <ion-col *ngFor="let hour of day.hourly" size="4">
+              <div class="icon">
+                <img [src]="hour.icon" [alt]="hour.description" />
+              </div>
+              <div class="temperature">{{ hour.temperature }}°C</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

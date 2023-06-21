@@ -1,0 +1,53 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  max-width: 320px;
+  min-height: calc(480px - var(--offset-top) - 2 * var(--ion-padding));
+  margin: 0 auto;
+  text-align: center;
+  color: var(--ion-color-primary);
+
+  @media (min-width: 768px) {
+    max-width: 460px;
+  }
+}
+
+.city {
+  font-size: 3rem;
+}
+
+.conditions,
+.forecast {
+  flex: 1 1 auto;
+
+  @media (min-width: 320px) {
+    flex: 1 1 0;
+  }
+}
+
+.conditions {
+  .temperature {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .description {
+    margin-bottom: 1rem;
+  }
+
+  .temperature-range,
+  .humidity,
+  .pressure {
+    font-size: 0.8rem;
+  }
+}
+
+.forecast {
+  .day {
+    font-size: 1.2rem;
+  }
+
+  .temperature {
+    font-size: 0.8rem;
+  }
+}

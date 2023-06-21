@@ -1,27 +1,18 @@
-#container {
-  text-align: center;
+ion-toolbar {
+  --min-height: 44px;
+  --background: var(--ion-color-primary);
+  --color: #1d191a;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  @media (min-width: 768px) {
+    --min-height: 56px;
+  }
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
+ion-content {
+  --background: #1d191a;
+  --ion-padding: 16px;
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+  @media (min-width: 768px) {
+    --ion-padding: 32px;
+  }
 }
