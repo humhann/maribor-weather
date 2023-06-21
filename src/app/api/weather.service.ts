@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, map, startWith } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 export type Forecast = {
@@ -36,7 +36,72 @@ export class WeatherService {
 
   constructor(private http: HttpClient) {}
 
-  getForecast(
+  public getForecast(
+    latitude: string,
+    longitude: string,
+    language: string,
+    forceRemote = false
+  ): Observable<Forecast> {
+    return new Observable((observer) => {
+      if (!forceRemote) {
+        const initialData = this.getForecastLocal(
+          latitude,
+          longitude,
+          language
+        );
+
+        if (initialData) {
+          observer.next(initialData);
+        }
+      }
+
+      this.getForecastRemote(latitude, longitude, language).subscribe({
+        next: (data) => {
+          observer.next(data);
+          this.storeForecastLocal(latitude, longitude, language, data);
+        },
+        complete: () => {
+          observer.complete();
+        },
+      });
+    });
+  }
+
+  private getForecastLocal(
+    latitude: string,
+    longitude: string,
+    language: string
+  ): Forecast | null {
+    const key = this.getForecastLocalKey(latitude, longitude, language);
+    try {
+      return JSON.parse(localStorage.getItem(key) || '');
+    } catch (error) {}
+
+    return null;
+  }
+
+  private storeForecastLocal(
+    latitude: string,
+    longitude: string,
+    language: string,
+    data: Forecast
+  ): void {
+    const key = this.getForecastLocalKey(latitude, longitude, language);
+
+    try {
+      localStorage.setItem(key, JSON.stringify(data));
+    } catch (error) {}
+  }
+
+  private getForecastLocalKey(
+    latitude: string,
+    longitude: string,
+    language: string
+  ): string {
+    return `forecast-${latitude}-${longitude}-${language}`;
+  }
+
+  private getForecastRemote(
     latitude: string,
     longitude: string,
     language: string

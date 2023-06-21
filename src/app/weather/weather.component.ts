@@ -15,7 +15,6 @@ export class WeatherComponent implements OnInit {
   language = 'sl-SI';
   dateFormat?: string;
   weatherData?: Forecast;
-  lastUpdated?: Date;
 
   private latitude = '46.5535';
   private longitude = '15.6445';
@@ -40,18 +39,21 @@ export class WeatherComponent implements OnInit {
     this.getWeatherData();
   }
 
-  getWeatherData() {
+  getWeatherData(forceRemote = false) {
     this.weatherData = undefined;
     this.weatherService
-      .getForecast(this.latitude, this.longitude, this.translate.currentLang)
+      .getForecast(
+        this.latitude,
+        this.longitude,
+        this.translate.currentLang,
+        forceRemote
+      )
       .subscribe({
         next: (data) => {
-          console.log(data);
           this.weatherData = data;
-          this.lastUpdated = new Date();
         },
         error: (error) => {
-          console.log(error);
+          console.error(error);
         },
       });
   }

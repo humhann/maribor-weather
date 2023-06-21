@@ -18,7 +18,7 @@ export class HomePage {
   }
 
   getWeather() {
-    this.weatherComponent.getWeatherData();
+    this.weatherComponent.getWeatherData(true);
   }
 
   selectLanguage(lang: string) {
